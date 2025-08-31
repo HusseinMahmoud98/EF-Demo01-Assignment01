@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment01.Migrations
 {
     [DbContext(typeof(ITIDbContext))]
-    [Migration("20250831083119_ITI_Annotation_00")]
-    partial class ITI_Annotation_00
+    [Migration("20250831172018_ITI_Configuration_00")]
+    partial class ITI_Configuration_00
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,15 +34,15 @@ namespace Assignment01.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar")
                         .HasColumnName("Crs_Name");
 
                     b.Property<int>("Top_Id")
@@ -62,7 +62,8 @@ namespace Assignment01.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Elevation")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar");
 
                     b.HasKey("Course_Id", "Inst_Id");
 
@@ -78,13 +79,17 @@ namespace Assignment01.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("HirigDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int>("Inst_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
                         .HasColumnName("Dept_Name");
 
                     b.HasKey("Id");
@@ -95,15 +100,16 @@ namespace Assignment01.Migrations
             modelBuilder.Entity("Assignment01.Entities.Instructor", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Address")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("Inst_Address");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("Bonus")
-                        .HasColumnType("float");
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("Bonus")
+                        .HasColumnType("money");
 
                     b.Property<int>("Dept_Id")
                         .HasColumnType("int");
@@ -113,11 +119,12 @@ namespace Assignment01.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar")
                         .HasColumnName("Inst_Name");
 
-                    b.Property<double>("Salary")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Salary")
+                        .HasColumnType("money");
 
                     b.HasKey("Id");
 
@@ -149,8 +156,7 @@ namespace Assignment01.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("St_Address");
 
                     b.Property<int>("Age")
@@ -161,13 +167,11 @@ namespace Assignment01.Migrations
 
                     b.Property<string>("FName")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("St_Fname");
 
                     b.Property<string>("LName")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("St_Lname");
 
                     b.HasKey("Id");
@@ -184,9 +188,7 @@ namespace Assignment01.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Top_Name");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -11,19 +11,20 @@ namespace Assignment01.Entities
     [Table("St_Crs", Schema = "dbo")]
     internal class Stud_Course
     {
-        #region 1. By Convention
-        //public int stud_Id { get; set; }
-        //public int Course_Id { get; set; }
-        //public int? Grade { get; set; } 
+        #region 1. By Convention, 3. By Fleunt Api
+        public int stud_Id { get; set; }
+        public int Course_Id { get; set; }
+        public int? Grade { get; set; }
         #endregion
 
         #region 2. By Annotation
-        public int stud_Id { get; set; }
 
- 
-        public int Course_Id { get; set; }
+        //public int stud_Id { get; set; }
+        //[Column("Crs_Id")]
+        //public int Course_Id { get; set; }
 
-        public int? Grade { get; set; }
+        //[Range(0, 100)]
+        //public int? Grade { get; set; }
         #endregion
 
     }

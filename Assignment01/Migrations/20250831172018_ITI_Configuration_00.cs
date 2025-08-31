@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Assignment01.Migrations
 {
     /// <inheritdoc />
-    public partial class ITI_Annotation_00 : Migration
+    public partial class ITI_Configuration_00 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,8 +22,8 @@ namespace Assignment01.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Duration = table.Column<int>(type: "int", nullable: false),
-                    Crs_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Crs_Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Top_Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -38,7 +38,7 @@ namespace Assignment01.Migrations
                 {
                     Inst_Id = table.Column<int>(type: "int", nullable: false),
                     Course_Id = table.Column<int>(type: "int", nullable: false),
-                    Elevation = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Elevation = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,9 +52,9 @@ namespace Assignment01.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Dept_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Dept_Name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Inst_Id = table.Column<int>(type: "int", nullable: false),
-                    HirigDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    HirigDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
@@ -66,11 +66,12 @@ namespace Assignment01.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Inst_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Bonus = table.Column<double>(type: "float", nullable: false),
-                    Salary = table.Column<double>(type: "float", nullable: false),
-                    Inst_Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Inst_Name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Bonus = table.Column<decimal>(type: "money", nullable: true),
+                    Salary = table.Column<decimal>(type: "money", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HoureRate = table.Column<int>(type: "int", nullable: true),
                     Dept_Id = table.Column<int>(type: "int", nullable: false)
                 },
@@ -100,9 +101,9 @@ namespace Assignment01.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    St_Fname = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    St_Lname = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    St_Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    St_Fname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    St_Lname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    St_Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Dept_Id = table.Column<int>(type: "int", nullable: false)
                 },
@@ -118,7 +119,7 @@ namespace Assignment01.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Top_Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -14,7 +14,6 @@ namespace Demo01.Configuration
     {
         public void Configure(EntityTypeBuilder<Employee03> E)
         {
-          
                 //modelBuilder.Entity<Employee03>().HasKey("EmpId");
                 //modelBuilder.Entity<Employee03>().HasKey(nameof(Employee03.EmpId));
                 E.HasKey(e => e.EmpId);

@@ -11,17 +11,17 @@ namespace Assignment01.Entities
     [Table("Topics", Schema = "dbo")]
     internal class Topic
     {
-        #region 1. By Convention
-        //public int Id { get; set; }
-        //public string? Name { get; set; }
+        #region 1. By Convention, 3. By Fluent Api
+        public int Id { get; set; }
+        public string? Name { get; set; }
         #endregion
 
         #region 2. By Annotation
-        [Key]
-        public int Id { get; set; }
-        [Column("Top_Name")]
-        [Required]
-        public string? Name { get; set; }
+        //[Key]
+        //public int Id { get; set; }
+        //[Column("Top_Name")]
+        //[Required]
+        //public string? Name { get; set; }
         #endregion
     }
 }
