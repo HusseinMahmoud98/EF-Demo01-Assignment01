@@ -36,7 +36,6 @@ namespace Demo01.Configuration
                  *   .HasDefaultValue(DateTime.Now);
                  */
 
-
                 E.Property(e => e.DateOfCreation)
                  .HasDefaultValueSql("GETDATE()");
 
