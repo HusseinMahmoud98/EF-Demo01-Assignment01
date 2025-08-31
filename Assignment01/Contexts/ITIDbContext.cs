@@ -15,7 +15,7 @@ namespace Assignment01.Contexts
             optionsBuilder.UseSqlServer("Server = .; Database = EF_ITI; Trusted_Connection = True; TrustServerCertificate = True;");
         }
 
-        #region 1. By Convention
+        #region By Convention or By Annotation Composite Primary Key
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course_Inst>()
@@ -23,7 +23,7 @@ namespace Assignment01.Contexts
 
             modelBuilder.Entity<Stud_Course>()
                         .HasKey(sc => new { sc.stud_Id, sc.Course_Id });
-        } 
+        }
         #endregion
 
         public DbSet<Student> Students { get; set; }

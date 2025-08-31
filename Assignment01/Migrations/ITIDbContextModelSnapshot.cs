@@ -31,21 +31,23 @@ namespace Assignment01.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Crs_Name");
 
                     b.Property<int>("Top_Id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", "dbo");
                 });
 
             modelBuilder.Entity("Assignment01.Entities.Course_Inst", b =>
@@ -61,7 +63,7 @@ namespace Assignment01.Migrations
 
                     b.HasKey("Course_Id", "Inst_Id");
 
-                    b.ToTable("Crs_Insts");
+                    b.ToTable("Crs_Ins", "dbo");
                 });
 
             modelBuilder.Entity("Assignment01.Entities.Department", b =>
@@ -79,23 +81,23 @@ namespace Assignment01.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Dept_Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", "dbo");
                 });
 
             modelBuilder.Entity("Assignment01.Entities.Instructor", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("Inst_Address");
 
                     b.Property<double>("Bonus")
                         .HasColumnType("float");
@@ -108,14 +110,15 @@ namespace Assignment01.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Inst_Name");
 
                     b.Property<double>("Salary")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instructors");
+                    b.ToTable("Instuctors", "dbo");
                 });
 
             modelBuilder.Entity("Assignment01.Entities.Stud_Course", b =>
@@ -131,7 +134,7 @@ namespace Assignment01.Migrations
 
                     b.HasKey("stud_Id", "Course_Id");
 
-                    b.ToTable("St_Crs");
+                    b.ToTable("St_Crs", "dbo");
                 });
 
             modelBuilder.Entity("Assignment01.Entities.Student", b =>
@@ -143,7 +146,9 @@ namespace Assignment01.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("St_Address");
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
@@ -152,14 +157,19 @@ namespace Assignment01.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("FName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("St_Fname");
 
                     b.Property<string>("LName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("St_Lname");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", "dbo");
                 });
 
             modelBuilder.Entity("Assignment01.Entities.Topic", b =>
@@ -171,11 +181,13 @@ namespace Assignment01.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Top_Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Topics");
+                    b.ToTable("Topics", "dbo");
                 });
 #pragma warning restore 612, 618
         }

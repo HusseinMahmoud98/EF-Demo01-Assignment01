@@ -6,20 +6,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Assignment01.Migrations
 {
     /// <inheritdoc />
-    public partial class ITI_Convention_00 : Migration
+    public partial class ITI_Annotation_00 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "dbo");
+
             migrationBuilder.CreateTable(
                 name: "Courses",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Duration = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Crs_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Top_Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -28,7 +32,8 @@ namespace Assignment01.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Crs_Insts",
+                name: "Crs_Ins",
+                schema: "dbo",
                 columns: table => new
                 {
                     Inst_Id = table.Column<int>(type: "int", nullable: false),
@@ -37,16 +42,17 @@ namespace Assignment01.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Crs_Insts", x => new { x.Course_Id, x.Inst_Id });
+                    table.PrimaryKey("PK_Crs_Ins", x => new { x.Course_Id, x.Inst_Id });
                 });
 
             migrationBuilder.CreateTable(
                 name: "Departments",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Dept_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Inst_Id = table.Column<int>(type: "int", nullable: false),
                     HirigDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -56,25 +62,26 @@ namespace Assignment01.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Instructors",
+                name: "Instuctors",
+                schema: "dbo",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Inst_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Bonus = table.Column<double>(type: "float", nullable: false),
                     Salary = table.Column<double>(type: "float", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Inst_Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     HoureRate = table.Column<int>(type: "int", nullable: true),
                     Dept_Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Instructors", x => x.Id);
+                    table.PrimaryKey("PK_Instuctors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "St_Crs",
+                schema: "dbo",
                 columns: table => new
                 {
                     stud_Id = table.Column<int>(type: "int", nullable: false),
@@ -88,13 +95,14 @@ namespace Assignment01.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Students",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    St_Fname = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    St_Lname = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    St_Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Dept_Id = table.Column<int>(type: "int", nullable: false)
                 },
@@ -105,11 +113,12 @@ namespace Assignment01.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Topics",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Top_Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -121,25 +130,32 @@ namespace Assignment01.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Courses");
+                name: "Courses",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Crs_Insts");
+                name: "Crs_Ins",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Departments");
+                name: "Departments",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Instructors");
+                name: "Instuctors",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "St_Crs");
+                name: "St_Crs",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Students");
+                name: "Students",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Topics");
+                name: "Topics",
+                schema: "dbo");
         }
     }
 }
